@@ -1,6 +1,0 @@
-services:
-  - type: static
-    name: thugkeedtectool
-    env: static
-    buildCommand: ""
-    staticPublishPath: ./￼Enter
