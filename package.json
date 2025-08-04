@@ -1,15 +1,12 @@
 {
-  "name": "thugkeed-hacklab-v1",
+  "name": "thugkeed-hacklab-v2",
   "version": "1.0.0",
-  "description": "THUGKEED TECH HACKLAB v1 - Simulated hacking lab",
+  "description": "Evil hacker simulation panel by THUGKEED",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2"
-  },
-  "engines": {
-    "node": ">=14.0.0"
   }
 }
