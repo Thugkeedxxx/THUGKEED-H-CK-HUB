@@ -1,14 +1,12 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
 const PORT = process.env.PORT || 3000;
-
-app.use(express.static(__dirname)); // Serve all files in folder
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.listen(PORT, () => {
-  console.log(`THUGKEED HackLab running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`THUGKEED HACKLAB v2 running on port ${PORT}`));
