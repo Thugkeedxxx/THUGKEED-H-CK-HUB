@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>THUGKEED TECH HACKLAB v1</title>
+  <style>
+    body {
+      background: #000;
+      color: #00ff99;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff00ff;
+      margin-bottom: 20px;
+    }
+
+    .terminal {
+      background: #111;
+      padding: 20px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0f0;
+      min-height: 300px;
+      overflow-y: auto;
+    }
+
+    #input {
+      width: 100%;
+      background: #000;
+      border: none;
+      color: #00ff99;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .output {
+      margin-top: 10px;
+    }
+
+    .fake-packets {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      animation: movePackets 5s infinite linear;
+    }
+
+    .packet {
+      background: #111;
+      padding: 5px 10px;
+      border: 1px solid #00ff99;
+      color: #00ff99;
+      font-size: 12px;
+      animation: flicker 2s infinite;
+    }
+
+    @keyframes movePackets {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Loader styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #00ff99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: flicker 1s infinite;
+    }
+
+    .loading-text {
+      font-size: 24px;
+      color: #ff00ff;
+      animation: pulse 1s infinite;
+      margin-bottom: 10px;
+    }
+
+    .subtext {
+      font-size: 16px;
+      color: #00ff99;
+      margin-bottom: 20px;
+    }
+
+    .bar {
+      width: 200px;
+      height: 5px;
+      background: linear-gradient(90deg, #ff00ff, #00ff99);
+      animation: loading 2s infinite linear;
+      border-radius: 5px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes loading {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader">
+    <div class="loading-text">💻 THUGKEED TECH HACKLAB v1</div>
+    <div class="subtext">Initializing hacking environment...</div>
+    <div class="bar"></div>
+  </div>
+
+  <!-- Main App -->
+  <div id="mainApp" style="display: none;">
+    <h1>💻 THUGKEED TECH HACKLAB v1 💀</h1>
+    <div class="terminal" id="terminal">
+      <div>> Welcome to THUGKEED HackLab v1. Type `help` to begin.</div>
+    </div>
+    <input type="text" id="input" placeholder="Enter command..." autocomplete="off" />
+    <div class="fake-packets" id="packets">
+      <div class="packet">192.168.0.1 → 8.8.8.8</div>
+      <div class="packet">Packet: TCP:80</div>
+      <div class="packet">Packet: UDP:53</div>
+      <div class="packet">10.0.0.2 → 192.168.0.4</div>
+      <div class="packet">Sniffed: Port 443</div>
+    </div>
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const input = document.getElementById('input');
+
+    function printToTerminal(text) {
+      const line = document.createElement('div');
+      line.className = 'output';
+      line.textContent = '> ' + text;
+      terminal.appendChild(line);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function simulateCrack() {
+      printToTerminal('Starting Wi-Fi password cracking...');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 15);
+        if (progress >= 100) {
+          printToTerminal('✅ Password Found: thugkeed123');
+          clearInterval(interval);
+        } else {
+          printToTerminal(`Cracking... ${progress}%`);
+        }
+      }, 500);
+    }
+
+    function simulateScan(ip) {
+      printToTerminal(`Scanning ${ip}...`);
+      setTimeout(() => {
+        printToTerminal(`Port 80: open`);
+        printToTerminal(`Port 443: open`);
+        printToTerminal(`Port 22: closed`);
+      }, 1000);
+    }
+
+    function simulateKeylogger() {
+      printToTerminal("Keylogger started. Type in the box below:");
+      const keyBox = document.createElement('textarea');
+      keyBox.rows = 3;
+      keyBox.style.width = '100%';
+      keyBox.style.background = '#111';
+      keyBox.style.color = '#0f0';
+      keyBox.style.border = '1px solid #0f0';
+      keyBox.oninput = () => {
+        printToTerminal(`You typed: ${keyBox.value}`);
+      };
+      terminal.appendChild(keyBox);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = input.value.trim();
+        printToTerminal(cmd);
+        input.value = '';
+
+        if (cmd === 'help') {
+          printToTerminal('Available commands:');
+          printToTerminal('- crack wifi');
+          printToTerminal('- scan [ip]');
+          printToTerminal('- keylogger');
+        } else if (cmd === 'crack wifi') {
+          simulateCrack();
+        } else if (cmd.startsWith('scan ')) {
+          const ip = cmd.split(' ')[1];
+          simulateScan(ip);
+        } else if (cmd === 'keylogger') {
+          simulateKeylogger();
+        } else {
+          printToTerminal('Unknown command. Type `help` for options.');
+        }
+      }
+    });
+
+    // Loading screen transition
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+      }, 3000);
+    });
+  </script>
+</body>
+  </html>￼Enter
