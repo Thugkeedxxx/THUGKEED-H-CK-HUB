@@ -1,12 +1,15 @@
 {
-  "name": "thugkeed-hacklab-v2",
+  "name": "kings-of-freenet",
   "version": "1.0.0",
-  "description": "Evil hacker simulation panel by THUGKEED",
+  "description": "KING'S OF FREENET HackerSystem themed site",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
